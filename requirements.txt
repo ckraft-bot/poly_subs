@@ -1,0 +1,30 @@
+# ── Web framework ─────────────────────────────────────────────────────
+fastapi==0.111.0
+uvicorn[standard]==0.29.0
+websockets==12.0
+python-multipart==0.0.9
+jinja2==3.1.4
+
+# ── Speech-to-text (Faster-Whisper) ──────────────────────────────────
+faster-whisper==1.0.1
+
+# ── Translation (NLLB-200) ────────────────────────────────────────────
+transformers==4.41.1
+sentencepiece==0.2.0
+# CPU-only PyTorch — lighter install, no CUDA drivers needed
+torch==2.3.0
+torchvision==0.18.0
+
+# ── Audio ─────────────────────────────────────────────────────────────
+sounddevice==0.4.7
+numpy==1.26.4
+
+# ── Config & utilities ────────────────────────────────────────────────
+pydantic==2.7.1
+pydantic-settings==2.3.1
+python-dotenv==1.0.1
+
+# ── Dev & testing ─────────────────────────────────────────────────────
+pytest==8.2.0
+pytest-asyncio==0.23.7
+httpx==0.27.0

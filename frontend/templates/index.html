@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ app_name }}</title>
+  <link rel="stylesheet" href="/static/css/styles.css" />
+</head>
+<body>
+  <header>
+    <h1>&#127897;&#65039; {{ app_name }}</h1>
+    <p class="subtitle">Real-time speech &#8594; subtitles &#8594; translation</p>
+  </header>
+  <main>
+    <div class="controls">
+      <button id="btn-start" class="btn btn-primary">&#9654; Start</button>
+      <button id="btn-stop" class="btn btn-danger" disabled>&#9632; Stop</button>
+      <span id="status-indicator" class="status idle">&#9679; Idle</span>
+    </div>
+    <div class="subtitle-container">
+      <div class="subtitle-panel" id="panel-original">
+        <h2>Original</h2>
+        <p id="text-original" class="subtitle-text"></p>
+      </div>
+      <div class="subtitle-panel" id="panel-translated">
+        <h2>Translated <small>({{ target_language }})</small></h2>
+        <p id="text-translated" class="subtitle-text"></p>
+      </div>
+    </div>
+    <div class="history" id="history"></div>
+  </main>
+  <script src="/static/js/audio_capture.js"></script>
+  <script src="/static/js/subtitle_renderer.js"></script>
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
