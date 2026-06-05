@@ -5,7 +5,7 @@ from typing import Literal
 
 class Settings(BaseSettings):
     # App
-    app_name: str = "TransSubs"
+    app_name: str = "Poly Sub"
     app_version: str = "0.1.0"
     debug: bool = False
     host: str = "0.0.0.0"
