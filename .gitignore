@@ -216,3 +216,22 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# model artifacts
+models/
+*.bin
+*.pt
+*.pth
+*.onnx
+*.ckpt
+*.gguf
+
+# whisper / hf cache
+.cache/
+huggingface/
+huggingface_hub/
+transformers/
+torch/
+
+# local runtime downloads
+downloads/
