@@ -16,7 +16,11 @@ class AudioCapture {
   }
 
   async start() {
-    this._stream = await navigator.mediaDevices.getUserMedia({
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+      throw new Error('Browser does not support microphone capture. Use a modern browser and open the app over localhost.');
+    }
+
+    const constraints = {
       audio: {
         sampleRate:   this.sampleRate,
         channelCount: 1,       // mono
@@ -25,7 +29,18 @@ class AudioCapture {
         autoGainControl:   true,
       },
       video: false,
-    });
+    };
+
+    try {
+      this._stream = await navigator.mediaDevices.getUserMedia(constraints);
+    } catch (err) {
+      console.warn('Audio capture failed with strict constraints:', err);
+      if (err.name === 'OverconstrainedError' || err.name === 'NotReadableError') {
+        this._stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
+      } else {
+        throw err;
+      }
+    }
 
     this._ctx    = new AudioContext({ sampleRate: this.sampleRate });
     this._source = this._ctx.createMediaStreamSource(this._stream);

@@ -67,12 +67,14 @@ Edit `.env` to set your target language and model sizes.
 make dev       # development with hot-reload
 make run       # production
 
-# Windows
-uvicorn backend.main:app --host 0.0.0.0 --port 8000 --reload   # development
-uvicorn backend.main:app --host 0.0.0.0 --port 8000             # production
+# Windows (local only)
+uvicorn backend.main:app --host 127.0.0.1 --port 8000 --reload   # development
+uvicorn backend.main:app --host 127.0.0.1 --port 8000             # production
 ```
 
-Open http://localhost:8000 and click **Start**.
+Open http://localhost:8000 or http://127.0.0.1:8000 and click **Start**.
+
+> If the browser prompts for microphone access, allow it. The app requires a local microphone permission and must run over localhost.
 
 ## Configuration
 

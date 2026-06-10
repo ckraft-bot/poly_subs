@@ -46,9 +46,14 @@
       try {
         await capture.start();
       } catch (err) {
-        // Mic permission denied or device error
+        const denied = err.name === 'NotAllowedError' || err.name === 'SecurityError' || err.name === 'NotFoundError';
+        const message = denied
+          ? 'Microphone access denied. Allow microphone permissions for this site and refresh the page.'
+          : err.message || 'Unable to start microphone capture.';
+
+        console.error('Audio capture error:', err);
         setStatus('error', 'Mic error');
-        renderer.showError(err.message);
+        renderer.showError(message);
         stop();
       }
     };
@@ -63,12 +68,16 @@
       }
     };
 
-    socket.onerror = () => {
+    socket.onerror = (event) => {
+      console.error('WebSocket error:', event);
       setStatus('error', 'Connection error');
-      renderer.showError('WebSocket connection failed.');
+      renderer.showError('WebSocket connection failed. Check that the app is running on localhost and try again.');
     };
 
-    socket.onclose = () => {
+    socket.onclose = (event) => {
+      if (event && event.code !== 1000) {
+        console.warn('WebSocket closed unexpectedly:', event);
+      }
       if (capture) stop(); // unexpected close → clean up
     };
   }
